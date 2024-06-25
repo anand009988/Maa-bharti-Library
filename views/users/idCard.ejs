@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maabhartilibrary.com</title>
+    <style>
+        /* Your existing CSS styles */
+        .id-card-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            background-color: white;
+            margin: 10px;
+        }
+
+        .heading-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color:white;
+            text-align: center;
+            height: 50px; /* Adjust as needed */
+        }
+
+        .heading-div h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .id-title {
+            max-width: 100px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 14px;
+            background-color: red;
+            border-radius: 97px;
+        }
+
+        .id-title p {
+            margin: 0;
+            color: white;
+            text-align: center;
+        }
+
+        .id-card {
+            width: 550px;
+            border: 2px solid #000;
+            border-radius: 10px;
+            background-color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .idcard-header {
+            background-color: white;
+            color: black;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        .idcard-header img {
+            width: 80px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .idcard-header h1 {
+            margin: 0;
+            font-size: 30px;
+            color: black;
+        }
+
+        .idcard-header h2 {
+            margin: 0;
+            font-size: 50px;
+            color: #ffff00;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 1.3);
+        }
+
+        .idcard-header p {
+            margin: 5px 0 0;
+            font-size: 18px;
+        }
+
+        .slogan {
+            background-color: #0326BD;
+            color: #fff;
+            text-align: center;
+            margin: 5px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .slogan p {
+            display: inline;
+        }
+
+        .idcard-content {
+            display: flex;
+            padding: 0 0;
+            margin: 0;
+        }
+
+        .idcard-photo {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .idcard-photo img {
+            width: 120px;
+            height: 160px;
+            border-radius: 50%;
+            border: 2px solid #000;
+        }
+
+        .info {
+            flex: 2.5;
+        }
+
+        .info p {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        .info p span {
+            font-weight: bold;
+            color: red;
+        }
+
+        .signature {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            margin-left: 23px;
+        }
+
+        .signature div {
+            text-align: center; 
+            margin-right: 24px;
+
+        }
+
+        .signature div p {
+            margin: 10px 0 0;
+            font-size: 18px;
+        }
+
+        .signature img {
+            width: 100px;
+            height: 30px;
+        }
+
+        .idcard-footer {
+            background-color: #ffd700;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 550px) {
+            .idcard-header h2 {
+                font-size: 25px;
+            }
+
+            .idcard-header img {
+                width: 40px;
+            }
+
+            .idcard-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .idcard-photo img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .info {
+                padding-left: 0;
+                margin-left: 22px;
+            }
+
+            .info p {
+                font-size: 12px;
+            }
+
+            .signature img {
+                width: 60px;
+                height: 15px;
+            }
+
+            .signature div p {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="heading-div">
+        <h1 style="color: #0326BD;">Your Id-Card</h1>
+    </div>
+    <div class="id-card-body">
+        <div id="id-card" class="id-card">
+            <div class="idcard-header">
+                <img src='/userImages/माँ भारती लाइब्रेरी logo.png' alt="Logo">
+                <h2>माँ भारती लाइब्रेरी</h2>
+            </div>
+            <div class="slogan">
+                <p>समय के सदुपयोग के लिए एक अच्छा कदम</p>
+            </div>
+            <div class="id-title">
+                <p>ID Card</p>
+            </div>
+            <div class="idcard-content">
+                <div class="idcard-photo">
+                    <img src='/userImages/<%=user.image%>' height="120px" width="100px" alt="idcard-photo">
+                </div>
+                <div class="info">
+                    <p><span>Name :-</span> <%=user.name%></p>
+                    <p><span>Father's Name :-</span> <%=user.fatherName%></p>
+                    <p><span>Address :-</span> <%=user.address%></p>
+
+                    <% const months = [
+                    'January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ]; 
+               
+                const currMonth = new Date().getMonth()
+                const monthName=months[currMonth];
+                %>
+
+                    <p><span>Month :-</span><%=monthName%></monthName></p>
+                    <% const currentMonth = new Date().toLocaleString('default', { month: 'long' }); %>
+                    <% const currentMonthObj = user.admissions.find(admission => admission.months.some(month => month.month === currentMonth)); %>
+                    <p><span>Shift (Seat) :-</span>
+                    <% if (currentMonthObj && currentMonthObj.months.length > 0) { %>
+                        <% for (let i = 1; i <= 5; i++) { %>
+                            <% const shift = currentMonthObj.months.find(month => month.month === currentMonth).shifts.find(shift => shift.shift === i); %>
+                            <% if (shift) { %>
+                                <%= shift.shift %> (<%= shift.seatNo %>)
+                            <% } %>
+                            
+                    <% } %>
+                <% } else { %>
+                    <p>No shift information available for <%= currentMonth %></p>
+                <% } %>
+                </div>
+            </div>
+            <div class="signature">
+                <div>
+                    <img src="/userImages/<%=user.sign%>" alt="Student's Sign">
+                    <p>Student’s Sign</p>
+                </div>
+                <div>
+                    <img src="/userImages/director_sign.png" alt="Director's Sign">
+                    <p>Director’s Sign</p>
+                </div>
+            </div>
+            <div class="idcard-footer">
+                Address:- ABHISHEK ACADEMY, Near Chaiti Durga Mandir, Babua Bazar, Piri Bazar-811112
+            </div>
+        </div>
+    </div>
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    
+</body>
+</html>

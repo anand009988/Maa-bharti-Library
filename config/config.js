@@ -1,0 +1,2 @@
+const sessionSecret="fsaerewmysitesessionsecretqwertyuabhishfsrfewdasofekacafsatdmy"; 
+

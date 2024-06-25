@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maabhartilibrary.com</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+<style>
+    /* for starting model */
+    .startmodal-modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1000; 
+        left: 0; 
+        top: 0; 
+        width: 100%; 
+        height: 100%; 
+        overflow: auto; 
+        background-color: rgb(0,0,0); 
+        background-color: rgba(0,0,0,0.4); 
+        padding-top: 60px; 
+    }
+
+    .startmodal-modal-content {
+        background-color: #fefefe;
+        margin: 5% auto; 
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; 
+        max-width: 500px; 
+        position: relative;
+    }
+
+    .startmodal-close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .startmodal-close:hover,
+    .startmodal-close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* for modal content */
+    .notice {
+        margin-bottom: 20px;
+    }
+
+    .notice-title {
+        font-size: 1.5em;
+        color: #2C3E50;
+    }
+
+    .notice-content {
+        margin-left: 20px;
+    }
+
+    ul {
+        list-style-type: square;
+    }
+
+    /* Centering the library heading */
+    .libraryheading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    .libraryheading h1 {
+        margin: 0;
+        font-size: 2em;
+    }
+
+    .topbar {
+        display: flex;
+        align-items: center;
+    }
+</style>
+
+<style>
+    .fa-user{
+        font-size: 30px;
+    }
+    .fa-database{
+        font-size: 30px;
+    }
+    .fa-id-card{
+        font-size: 30px;
+    }
+    .fa-sign-out{
+        font-size: 30px;
+    }
+
+   .icon img{
+     border-radius: 100%;
+     height:36px;
+     width: 36px;
+   }
+</style>
+     
+</head>
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li data-content="heading">
+                    <a href="#">
+                        <span class="icon"> 
+                            <img src="/userImages/<%=user.image%>" alt="">
+                        </span>
+                        <span class="title">Hi <%= user.name %></span>
+                    </a>
+                </li>
+                <li data-content="profile">
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <span class="title">User Profile</span>
+                    </a>
+                </li>
+                
+                <li data-content="admission">
+                    <a href="#">
+                        <span class="icon">
+                         <i class='fas fa-file-signature' style='font-size:30px'></i>
+                        </span>
+                        <span class="title">Admission/Renewable</span>
+                    </a>
+                </li>
+                <li data-content="idCard">
+                    <a href="#">
+                        <span class="icon">
+                            <i class="fa-solid fa-id-card"></i>
+                        </span>
+                        <span class="title">Student's Id Card</span>
+                    </a>
+                </li>
+                <li data-content="changePassword">
+                    <a href="#">
+                        <span class="icon">
+                            <i class='fas fa-sync-alt' style='font-size:30px'></i>
+                        </span>
+                        <span class="title">Change Password</span>
+                    </a>
+                </li>
+                <li id="logoutButton">
+                    <a href="#">
+                      <span class="icon">
+                        <i class="fas fa-sign-out"></i>
+                      </span>
+                      <span class="title">LogOut</span>
+                    </a>
+                  </li>
+                
+            </ul>
+           
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                <div class="libraryheading">
+                    <h1>माँ भारती लाइब्रेरी</h1>
+                </div>
+            </div>
+
+            <!-- ================ Dynamic Content Area ================= -->
+            <div class="content">
+                <div id="profile" class="content-section">
+                    <%- include('profile', { user: user }) %>
+                </div>
+                <div id="admission" class="content-section">
+                    <%- include('admission', { user: user }) %>
+                </div>
+                <div id="idCard" class="content-section">
+                    <%- include('idCard',{user:user}) %>
+                </div>
+                <div id="changePassword" class="content-section">
+                    <%- include('changePassword',{user:user}) %>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="startmodalImportantMessageModal" class="startmodal-modal">
+        <div class="startmodal-modal-content">
+            <span class="startmodal-close">&times;</span>
+            <h4>Important Messages</h4>
+            <p>Here are the important messages for you.</p>
+            <div class="notice">
+                <div class="notice-title">पुस्तकालय के नियम और निर्देश:</div>
+                <div class="notice-content">
+                    <ul>
+                        <li>कृपया पुस्तकें समय पर लौटाएं।</li>
+                        <li>पुस्तकालय में शांति बनाए रखें।</li>
+                        <li>मोबाइल फोन को साइलेंट मोड में रखें।</li>
+                        <li>पुस्तकें और सामग्री साफ-सुथरी रखें।</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="notice">
+                <div class="notice-title">पुस्तकालय के समय:</div>
+                <div class="notice-content">
+                    <ul>
+                        <li>सोमवार से शुक्रवार: सुबह 9:00 बजे से शाम 6:00 बजे तक।</li>
+                        <li>शनिवार: सुबह 10:00 बजे से दोपहर 2:00 बजे तक।</li>
+                        <li>रविवार और छुट्टियों पर पुस्तकालय बंद रहेगा।</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="notice">
+                <div class="notice-title">पुस्तकें उधार लेने की प्रक्रिया:</div>
+                <div class="notice-content">
+                    <ul>
+                        <li>छात्र अपनी पहचान पत्र दिखाकर पुस्तकें उधार ले सकते हैं।</li>
+                        <li>प्रत्येक छात्र एक बार में अधिकतम 3 पुस्तकें उधार ले सकता है।</li>
+                        <li>पुस्तकें उधार लेने की अवधि 15 दिन है, जिसे एक बार बढ़ाया जा सकता है।</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="notice">
+                <div class="notice-title">पुस्तकें लौटाने में विलंब:</div>
+                <div class="notice-content">
+                    <ul>
+                        <li>पुस्तकें समय पर न लौटाने पर जुर्माना लगाया जाएगा।</li>
+                        <li>विलंब शुल्क प्रति दिन ₹1/- है।</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="notice">
+                <div class="notice-title">पुस्तक अनुरोध:</div>
+                <div class="notice-content">
+                    <ul>
+                        <li>यदि किसी पुस्तक की आवश्यकता हो जो पुस्तकालय में उपलब्ध नहीं है, तो छात्र अनुरोध फॉर्म भर सकते हैं।</li>
+                        <li>अनुरोध फॉर्म पुस्तकालय के काउंटर पर उपलब्ध है।</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="notice">
+                <div class="notice-title">पढ़ाई के लिए शांत क्षेत्र:</div>
+                <div class="notice-content">
+                    <ul>
+                        <li>पुस्तकालय में एक शांत क्षेत्र उपलब्ध है जहाँ छात्र एकांत में पढ़ाई कर सकते हैं।</li>
+                        <li>इस क्षेत्र में समूह अध्ययन की अनुमति नहीं है।</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="notice">
+                <div class="notice-title">डिजिटल संसाधन:</div>
+                <div class="notice-content">
+                    <ul>
+                        <li>पुस्तकालय में कंप्यूटर और इंटरनेट सुविधा उपलब्ध है।</li>
+                        <li>छात्र ऑनलाइन शोध और अध्ययन सामग्री डाउनलोड कर सकते हैं।</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="notice">
+                <div class="notice-title">पुस्तक प्रदर्शनी:</div>
+                <div class="notice-content">
+                    <ul>
+                        <li>पुस्तकालय में हर महीने नई पुस्तकों की प्रदर्शनी लगाई जाती है।</li>
+                        <li>छात्र नई पुस्तकों के बारे में जानकारी प्राप्त कर सकते हैं और उन्हें उधार ले सकते हैं।</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="notice">
+                <div class="notice-title">पुस्तक दान:</div>
+                <div class="notice-content">
+                    <ul>
+                        <li>छात्र और शिक्षक पुस्तकालय में पुस्तकों का दान कर सकते हैं।</li>
+                        <li>दान की गई पुस्तकें अन्य छात्रों के लिए उपयोगी हो सकती हैं।</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="notice">
+                <div class="notice-title">समूह अध्ययन कक्ष:</div>
+                <div class="notice-content">
+                    <ul>
+                        <li>समूह अध्ययन के लिए विशेष कमरे उपलब्ध हैं।</li>
+                        <li>इन कमरों का उपयोग करने के लिए पहले से बुकिंग करानी होगी।</li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <!-- =========== Scripts =========  -->
+    <script src="/js/studentDashboard.js"></script>
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('startmodalImportantMessageModal');
+            const closeButton = document.querySelector('.startmodal-close');
+
+            // Function to show the modal
+            function showModal() {
+                modal.style.display = 'block';
+            }
+
+            // Event listener for the close button
+            closeButton.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            // Event listener to close the modal when clicking outside of the modal content
+            window.addEventListener('click', (event) => {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Call the function to show the modal after the user logs in
+            // showModal();
+        });
+    </script>
+</body>
+</html>

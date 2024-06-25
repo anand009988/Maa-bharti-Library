@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-logo {
+            width: 80px;
+            height: auto;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .required::after {
+            content: '*';
+            color: red;
+            margin-left: 4px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group select,
+        .form-group textarea,
+        .form-group input[type="date"],
+        .form-group input[type="number"],
+        .form-group .shift-checkboxes {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .shift-checkboxes {
+            grid-column: span 2;
+            margin-top: 10px;
+        }
+
+        .shift-checkboxes label {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+
+        .back-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ccc;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #bbb;
+        }
+
+        #message {
+            margin-top: 20px;
+            color: red;
+        }
+    </style>
+    <title>maabhartilibrary.com</title>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="header">
+            <img class="header-logo" src="/path/to/your/logo.png" alt="Maa Bharti Library Logo">
+            <div class="header-title">माँ भारती लाइब्रेरी</div>
+            <p>Admission Form</p>
+        </div>
+        <form id="admissionForm" method="POST" action="/adminDashboard/add-student" enctype="multipart/form-data" class="form-container">
+            <div class="form-group">
+                <label for="name" class="required">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name"  required>
+            </div>
+            <div class="form-group">
+                <label for="fatherName" class="required">Father's Name:</label>
+                <input type="text" id="fatherName" name="fatherName" placeholder="Enter father's name" required>
+            </div>
+            <div class="form-group">
+                <label for="guardianName" class="required">Guardian's Name:</label>
+                <input type="text" id="guardianName" name="guardianName" placeholder="Enter guardian's name"  required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="Choose">Choose</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="mobile" class="required">Mobile No:</label>
+                <input type="text" id="mobile" name="mobile" placeholder="Enter mobile number" required>
+            </div>
+            <div class="form-group">
+                <label for="email" class="required">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter email address"  required>
+            </div>
+            <div class="form-group">
+                <label for="aadhar" class="required">Aadhar No:</label>
+                <input type="text" id="aadhar" name="aadhar" placeholder="Enter Aadhar number"  required>
+            </div>
+            <div class="form-group">
+                <label for="guardianMobile" class="required">Guardian's No:</label>
+                <input type="text" id="guardianMobile" name="guardianMobile" placeholder="Enter guardian's mobile number"  required>
+            </div>
+            <div class="form-group">
+                <label for="whatsapp">WhatsApp No:</label>
+                <input type="text" id="whatsapp" name="whatsapp" placeholder="Enter WhatsApp number" >
+            </div>
+            <div class="form-group">
+                <label for="aim">Aim:</label>
+                <input type="text" id="aim" name="aim" placeholder="Enter your aim" >
+            </div>
+            <div class="form-group">
+                <label for="qualification">Qualification:</label>
+                <input type="text" id="qualification" name="qualification" placeholder="Enter your qualification" >
+            </div>
+            <div class="form-group">
+                <label for="dob" class="required">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" >
+            </div>
+            <div class="form-group">
+                <label for="year" class="required">Year:</label>
+                <input type="number" id="year" name="year" min="2024" max="2030">
+            </div>
+            <div class="form-group">
+                <label for="month" class="required">Month:</label>
+                <select id="month" name="month" required>
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5" selected>June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
+            </div>
+            <div class="form-group shift-checkboxes">
+                <label class="required">Shifts:</label><br>
+                <label><input type="checkbox" name="shifts" value="1"> Shift 1</label>
+                <label><input type="checkbox" name="shifts" value="2"> Shift 2</label>
+                <label><input type="checkbox" name="shifts" value="3"> Shift 3</label>
+                <label><input type="checkbox" name="shifts" value="4"> Shift 4</label>
+                <label><input type="checkbox" name="shifts" value="5"> Shift 5</label>
+            </div>
+            <button class="submit-button" type="submit">Submit Application</button>
+        </form>
+        <button class="back-button" onclick="window.location.href='/adminDashboard'">Back to Dashboard</button>
+        <div id="message"></div>
+    </div>
+    <script>
+        
+    const admissionForm = document.getElementById('admissionForm');
+    admissionForm.addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    try {
+        const formData = new FormData(admissionForm);
+        const response = await fetch('/adminDashboard/add-student', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const responseData = await response.json();
+        
+        if (response.ok) {
+            // Successful submission
+            alert(responseData.message); // Show success message
+            admissionForm.reset(); // Optionally, reset the form
+        } else {
+            // Server returned an error
+            alert(responseData.message); // Show error message
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again later.');
+    }
+});
+</script>
+
+</body>
+</html>

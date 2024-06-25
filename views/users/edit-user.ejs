@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>maabhartilibrary.com</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .edit-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .edit-title {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .edit-img {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 150px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+        .edit-form {
+            text-align: left;
+        }
+        .edit-form-label {
+            margin-bottom: 5px;
+            color: #333;
+            display: block;
+            text-align: left;
+        }
+        .edit-form-input,
+        .edit-form-select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .edit-form-button {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .edit-form-button:hover {
+            background-color: #218838;
+        }
+        .edit-back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .edit-back-link:hover {
+            text-decoration: underline;
+        }
+        .edit-shift-container {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: left;
+        }
+        .edit-shift-container h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .edit-shift {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .edit-shift label {
+            width: 30%;
+            margin-right: 10px;
+            text-align: right;
+        }
+        .edit-shift input,
+        .edit-shift select {
+            width: 65%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .edit-pay-img-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+        .edit-pay-img {
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+        .payment-status-pending {
+            color: red;
+        }
+        .payment-status-completed {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="edit-container">
+        <h1 class="edit-title">Edit User Details</h1>
+        
+        <img src="/userImages/<%= user.image %>" alt="User Image" class="edit-img">
+
+        <form action="/update-shift" method="POST" class="edit-form">
+            <input type="hidden" name="_id" value="<%= user._id %>">
+
+            <label for="name" class="edit-form-label">Name:</label>
+            <input type="text" id="name" name="name" class="edit-form-input" value="<%= user.name %>">
+
+            <label for="fatherName" class="edit-form-label">Father's Name:</label>
+            <input type="text" id="fatherName" name="fatherName" class="edit-form-input" value="<%= user.fatherName %>">
+
+            <label for="guardianName" class="edit-form-label">Guardian's Name:</label>
+            <input type="text" id="guardianName" name="guardianName" class="edit-form-input" value="<%= user.guardianName %>">
+
+            <label for="gender" class="edit-form-label">Gender:</label>
+            <select id="gender" name="gender" class="edit-form-select">
+                <option value="Choose" <%= user.gender === 'Choose' ? 'selected' : '' %>>Choose</option>
+                <option value="Male" <%= user.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                <option value="Female" <%= user.gender === 'Female' ? 'selected' : '' %>>Female</option>
+                <option value="Other" <%= user.gender === 'Other' ? 'selected' : '' %>>Other</option>
+            </select>
+
+            <label for="mobile" class="edit-form-label">Mobile Number:</label>
+            <input type="text" id="mobile" name="mobile" class="edit-form-input" value="<%= user.mobile %>">
+
+            <label for="email" class="edit-form-label">Email:</label>
+            <input type="email" id="email" name="email" class="edit-form-input" value="<%= user.email %>">
+
+            <label for="aadhar" class="edit-form-label">Aadhar:</label>
+            <input type="text" id="aadhar" name="aadhar" class="edit-form-input" value="<%= user.aadhar %>">
+
+            <label for="guardianMobile" class="edit-form-label">Guardian Mobile:</label>
+            <input type="text" id="guardianMobile" name="guardianMobile" class="edit-form-input" value="<%= user.guardianMobile %>">
+
+            <label for="whatsapp" class="edit-form-label">WhatsApp:</label>
+            <input type="text" id="whatsapp" name="whatsapp" class="edit-form-input" value="<%= user.whatsapp %>">
+
+            <label for="aim" class="edit-form-label">Aim:</label>
+            <input type="text" id="aim" name="aim" class="edit-form-input" value="<%= user.aim %>">
+
+            <label for="qualification" class="edit-form-label">Qualification:</label>
+            <input type="text" id="qualification" name="qualification" class="edit-form-input" value="<%= user.qualification %>">
+
+            <label for="dob" class="edit-form-label">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" class="edit-form-input" value="<%= user.dob.toISOString().substring(0, 10) %>">
+
+            <label for="address" class="edit-form-label">Address:</label>
+            <input type="text" id="address" name="address" class="edit-form-input" value="<%= user.address %>">
+
+            <!-- <label for="isAdmin" class="edit-form-label">Is Admin:</label>
+            <select id="isAdmin" name="isAdmin" class="edit-form-select">
+                <option value="0" <%= user.is_admin === 0 ? 'selected' : '' %>>No</option>
+                <option value="1" <%= user.is_admin === 1 ? 'selected' : '' %>>Yes</option>
+            </select> -->
+
+            <h2 class="edit-title">Shift Requests</h2>
+            <% user.admissions.forEach(function(admission, admissionIndex) { %>
+                <div class="edit-shift-container">
+                    <h3>Year: <%= admission.year %></h3>
+                    <input type="hidden" name="shiftRequests[<%= admissionIndex %>][year]" value="<%= admission.year %>">
+                    
+                    <% admission.months.forEach(function(month, monthIndex) { %>
+                        <h4>Month: <%= month.month %></h4>
+                        <input type="hidden" name="shiftRequests[<%= admissionIndex %>][months][<%= monthIndex %>][month]" value="<%= month.month %>">
+                        
+                        <% month.shifts.forEach(function(shift, shiftIndex) { %>
+                            <div class="edit-shift">
+                                <label for="shift<%= admissionIndex %>-<%= monthIndex %>-<%= shiftIndex %>">Shift :</label>
+                                <input type="number" id="shift<%= admissionIndex %>-<%= monthIndex %>-<%= shiftIndex %>" name="shiftRequests[<%= admissionIndex %>][months][<%= monthIndex %>][shifts][<%= shiftIndex %>][shift]" value="<%= shift.shift %>">
+
+                                <label for="seatNo<%= admissionIndex %>-<%= monthIndex %>-<%= shiftIndex %>">Seat No:</label>
+                                <input type="number" id="seatNo<%= admissionIndex %>-<%= monthIndex %>-<%= shiftIndex %>" name="shiftRequests[<%= admissionIndex %>][months][<%= monthIndex %>][shifts][<%= shiftIndex %>][seatNo]" value="<%= shift.seatNo %>">
+
+                                <label for="paymentStatus<%= admissionIndex %>-<%= monthIndex %>-<%= shiftIndex %>">Payment Status:</label>
+                                <select id="paymentStatus<%= admissionIndex %>-<%= monthIndex %>-<%= shiftIndex %>" name="shiftRequests[<%= admissionIndex %>][months][<%= monthIndex %>][shifts][<%= shiftIndex %>][paymentStatus]" class="edit-form-select payment-status <%= shift.paymentStatus === 'Pending' ? 'payment-status-pending' : 'payment-status-completed' %>">
+                                    <option value="Pending" <%= shift.paymentStatus === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                    <option value="Completed" <%= shift.paymentStatus === 'Completed' ? 'selected' : '' %>>Completed</option>
+                                </select>
+                            </div>
+                        <% }); %>
+
+                        <div class="edit-pay-img-container">
+                            <h4>Payment Screenshots for <%= month.month %></h4>
+                            <% if (month.paymentScreenshots && month.paymentScreenshots.length > 0) { %>
+                                <% month.paymentScreenshots.forEach(function(screenshot, screenshotIndex) { %>
+                                    <img src="/userImages/<%= screenshot %>" alt="Payment Screenshot" class="edit-pay-img">
+                                <% }); %>
+                            <% } else { %>
+                                <p>No payment screenshots available for this month.</p>
+                            <% } %>
+                        </div>
+                    <% }); %>
+                </div>
+            <% }); %>
+
+            <button type="submit" class="edit-form-button">Update User</button>
+        </form>
+
+        <a href="/adminDashboard" class="edit-back-link">Back to Dashboard</a>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentStatusSelects = document.querySelectorAll('.payment-status');
+            paymentStatusSelects.forEach(select => {
+                select.addEventListener('change', function() {
+                    if (select.value === 'Pending') {
+                        select.classList.remove('payment-status-completed');
+                        select.classList.add('payment-status-pending');
+                    } else if (select.value === 'Completed') {
+                        select.classList.remove('payment-status-pending');
+                        select.classList.add('payment-status-completed');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

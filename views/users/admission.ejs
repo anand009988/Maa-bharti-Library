@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maabhartilibrary.com</title>
+    <style>
+        .profile-container {
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .profile-info label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .profile-info input[type="text"],
+        .profile-info input[type="email"],
+        .profile-info select,
+        .profile-info textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .profile-info input[type="file"] {
+            margin-top: 10px;
+        }
+
+        .shift-checkboxes {
+            grid-column: span 2;
+        }
+
+        .shift-checkboxes label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .update-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .update-button:hover {
+            background-color: #45a049;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .header-logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .rules-textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .submit-checkbox {
+            margin-top: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .modal-button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .modal-button:hover {
+            background-color: #45a049;
+        }
+
+        .next-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .next-button:hover {
+            background-color: #0056b3;
+        }
+
+        @media screen and (min-width: 768px) {
+            .profile-info {
+                grid-template-columns: 1fr 1fr;
+            }
+            .shift-checkboxes {
+                grid-column: span 2;
+            }
+        }
+
+        @media screen and (min-width: 1024px) {
+            .profile-info {
+                grid-template-columns: 1fr 1fr 1fr; /* Example: Adjust columns for larger screens */
+            }
+            /* Additional adjustments for larger screens if needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="header">
+            <div class="header-title">Maa Bharti Library</div>
+            <p>Admission Form</p>
+        </div>
+        <form id="admissionForm" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="userId" value="<%= user._id %>">
+            <div class="profile-info">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="<%= user.name %>" placeholder="Name" readonly>
+                </div>
+                <div>
+                    <label for="fatherName">Father's Name:</label>
+                    <input type="text" id="fatherName" name="fatherName" value="<%= user.fatherName %>" placeholder="Father's Name" readonly>
+                </div>
+                <div>
+                    <label for="guardianName">Guardian's Name:</label>
+                    <input type="text" id="guardianName" name="guardianName" value="<%= user.guardianName %>" placeholder="Guardian's Name" readonly>
+                </div>
+                <div>
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" disabled>
+                        <option value="Choose" <%= user.gender === 'Choose' ? 'selected' : '' %>>Choose</option>
+                        <option value="Male" <%= user.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                        <option value="Female" <%= user.gender === 'Female' ? 'selected' : '' %>>Female</option>
+                        <option value="Other" <%= user.gender === 'Other' ? 'selected' : '' %>>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="mobile">Mobile No:</label>
+                    <input type="text" id="mobile" name="mobile" value="<%= user.mobile %>" readonly>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="<%= user.email %>" readonly>
+                </div>
+                <div>
+                    <label for="aadhar">Aadhar No:</label>
+                    <input type="text" id="aadhar" name="aadhar" value="<%= user.aadhar %>"  placeholder="Aadhar No" readonly>
+                </div>
+                <div>
+                    <label for="guardianMobile">Guardian's No:</label>
+                    <input type="text" id="guardianMobile" name="guardianMobile" value="<%= user.guardianMobile %>" readonly>
+                </div>
+                <div>
+                    <label for="whatsapp">WhatsApp No:</label>
+                    <input type="text" id="whatsapp" name="whatsapp" value="<%= user.whatsapp %>" placeholder="Whatsapp NO" readonly>
+                </div>
+                <div>
+                    <label for="aim">Aim:</label>
+                    <input type="text" id="aim" name="aim" value="<%= user.aim %>" placeholder="Aim" readonly>
+                </div>
+                <div>
+                    <label for="qualification">Qualification:</label>
+                    <input type="text" id="qualification" name="qualification" value="<%= user.qualification %>" placeholder="Qualification" readonly>
+                </div>
+                <div>
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" value="<%= user.dob.toISOString().split('T')[0] %>" readonly>
+                </div>
+                <div>
+                    <label for="year">Year:</label>
+                    <input type="number" id="year" name="year" min="2020" max="2030" value="<%= new Date().getFullYear() %>" readonly>
+                </div>
+                <div>
+                    <label for="month">Month:</label>
+                    <select id="month" name="month" disabled>
+                        <% const months = [
+                            'January', 'February', 'March', 'April', 'May', 'June',
+                            'July', 'August', 'September', 'October', 'November', 'December'
+                        ]; %>
+
+                        <%
+                            const currentDate = new Date();
+                            const currentMonth = currentDate.getMonth(); // Get the current month index (0-11)
+                            const currentDay = currentDate.getDate();   // Get the current date (1-31)
+
+                            let nextMonthIndex;
+
+                            if (currentDay >= 25) {
+                                // If the current date is after the 24th, the next month index is the next month
+                                nextMonthIndex = (currentMonth + 1) % 12; // Wrap around from December to January
+                            } else {
+                                // Otherwise, the next month index is the current month
+                                nextMonthIndex = currentMonth;
+                            }
+                        %>
+                        
+                        <% months.forEach((month, index) => { %>
+                            <option value="<%= index %>" <%= (nextMonthIndex === index) ? 'selected' : '' %>>
+                                <%= month %>
+                            </option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div>
+                    <label for="shifts">Shifts:</label>
+                    <div class="shift-checkboxes">
+                        <% 
+                        const currentYear = new Date().getFullYear();
+                        const nextMonthName = months[nextMonthIndex];
+                        // console.log(nextMonthName);
+                        const currentAdmission = user.admissions.find(admission => admission.year === currentYear);
+                        const nextMonthData = currentAdmission ? currentAdmission.months.find(month => month.month === nextMonthName) : null;
+                        const chosenShifts = nextMonthData ? nextMonthData.shifts.map(shift => shift.shift) : [];
+
+                        for (let i = 1; i <= 5; i++) { 
+                        %>
+                            <label>
+                                <input type="checkbox" name="shifts" value="<%= i %>" 
+                                    <%= chosenShifts.includes(i) ? 'checked disabled' : '' %> >
+                                Shift <%= i %>
+                            </label>
+                        <% } %>
+                    </div>
+                </div>
+                <div>
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" value="<%= user.address %>" placeholder="Address" readonly>
+                </div>
+            </div>
+            <div>
+                <label for="rules">Rules and Regulations:</label>
+                <textarea id="rules" name="rules" class="rules-textarea" disabled>Library Rule</textarea>
+            </div>
+            <div class="submit-checkbox">
+                <input type="checkbox" id="submitCheckbox" required>
+                <label for="submitCheckbox">I agree to the terms and conditions</label>
+            </div>
+            <button class="next-button" type="button">Next</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('admissionForm');
+            const nextButton = document.querySelector('.next-button');
+
+            nextButton.addEventListener('click', () => {
+                const shiftCheckboxes = document.querySelectorAll('input[name="shifts"]:checked');
+                if (shiftCheckboxes.length === 0) {
+                    alert('Please select at least one shift.');
+                    return;
+                }
+
+                // Collect selected shift values and convert to numbers
+                const selectedShifts = [];
+                shiftCheckboxes.forEach(checkbox => {
+                    selectedShifts.push(Number(checkbox.value));
+                });
+
+                if (!document.getElementById('submitCheckbox').checked) {
+                    alert('Please agree to the terms and conditions.');
+                    return;
+                }
+
+                // Prepare form data
+                const formData = new FormData(form);
+                formData.set('shifts', JSON.stringify(selectedShifts)); // Set 'shifts' as a JSON array in form data
+
+                const selectedMonth = document.getElementById('month').value;
+                formData.set('month', selectedMonth);
+
+                // Convert formData to JSON and store it in sessionStorage
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+
+                sessionStorage.setItem('admissionFormData', JSON.stringify(formObject));
+                window.location.href = '/studentDashboard/payment?id=' + formObject.userId;
+            });
+        });
+    </script>
+
+</body>
+</html>

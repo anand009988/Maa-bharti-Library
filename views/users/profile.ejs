@@ -1,0 +1,182 @@
+<title>maabhartilibrary.com</title>
+<style>
+    .profile-container {
+        width: 100%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+    .profile-image {
+        display: block;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+    .profile-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .profile-info label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .profile-info input, .profile-info select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    .shift-checkboxes {
+        grid-column: span 2;
+    }
+    .shift-checkboxes label {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    .shift-details {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .shift-details input, .shift-details label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .update-button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    .update-button:hover {
+        background-color: #45a049;
+    }
+    @media screen and (min-width: 768px) {
+        .profile-info {
+            grid-template-columns: 1fr 1fr; /* Two columns for tablets and larger */
+        }
+        .shift-checkboxes {
+            grid-column: span 2; /* Spanning two columns for checkboxes */
+        }
+    }
+
+    /* Media query for larger screens */
+    @media screen and (min-width: 1024px) {
+        .profile-info {
+            grid-template-columns: repeat(3, 1fr); /* Three columns for larger screens */
+        }
+    }
+</style>
+
+<div class="profile-container">
+    <form method="POST" action="/update-profile" enctype="multipart/form-data">
+        <input type="hidden" name="userId" value="<%= user._id %>">
+        <input type="hidden" name="isAdmin" value="<%= user.is_admin %>">
+        <img class="profile-image" src="/userImages/<%= user.image %>" alt="Profile Image"> 
+        <div class="profile-info">
+            <div>
+            <label for="profileImage">Change Profile Image</label>
+            <input type="file" name="profileImage" accept="image/*">
+           </div>
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="<%= user.name %>">
+            </div>
+            <div>
+                <label for="fatherName">Father's Name:</label>
+                <input type="text" id="fatherName" name="fatherName" value="<%= user.fatherName %>" placeholder="fatherName">
+            </div>
+            <div>
+                <label for="guardianName">Guardian's Name:</label>
+                <input type="text" id="guardianName" name="guardianName" value="<%= user.guardianName %>">
+            </div>
+            <div>
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="Choose" <%= user.gender === 'Choose' ? 'selected' : '' %>>Choose</option>
+                    <option value="Male" <%= user.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                    <option value="Female" <%= user.gender === 'Female' ? 'selected' : '' %>>Female</option>
+                    <option value="Other" <%= user.gender === 'Other' ? 'selected' : '' %>>Other</option>
+                </select>
+            </div>
+            <div>
+                <label for="mobile">Mobile No:</label>
+                <input type="text" id="mobile" name="mobile" value="<%= user.mobile %>">
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<%= user.email %>">
+            </div>
+            <div>
+                <label for="aadhar">Aadhar No:</label>
+                <input type="text" id="aadhar" name="aadhar" value="<%= user.aadhar %>">
+            </div>
+            <div>
+                <label for="guardianMobile">Guardian's No:</label>
+                <input type="text" id="guardianMobile" name="guardianMobile" value="<%= user.guardianMobile %>">
+            </div>
+            <div>
+                <label for="whatsapp">WhatsApp No:</label>
+                <input type="text" id="whatsapp" name="whatsapp" value="<%= user.whatsapp %>">
+            </div>
+            <div>
+                <label for="aim">Aim:</label>
+                <input type="text" id="aim" name="aim" value="<%= user.aim %>">
+            </div>
+            <div>
+                <label for="qualification">Qualification:</label>
+                <input type="text" id="qualification" name="qualification" value="<%= user.qualification %>">
+            </div>
+            <div>
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" value="<%= user.dob.toISOString().split('T')[0] %>">
+            </div>
+            <div>
+                <label for="religion">Religion:</label>
+                <select id="religion" name="religion">
+                    <option value="Choose" <%= user.religion === 'Choose' ? 'selected' : '' %>>Choose</option>
+                    <option value="Hindu" <%= user.religion === 'Hindu' ? 'selected' : '' %>>Hindu</option>
+                    <option value="Muslim" <%= user.religion === 'Muslim' ? 'selected' : '' %>>Muslim</option>
+                    <option value="Sikh" <%= user.religion === 'Sikh' ? 'selected' : '' %>>Sikh</option>
+                    <option value="Parsi" <%= user.religion === 'Parsi' ? 'selected' : '' %>>Parsi</option>
+                </select>
+            </div>
+            <div class="shift-checkboxes">
+                <label>Shifts:</label>
+                <% const currentMonth = new Date().toLocaleString('default', { month: 'long' }); %>
+                <% const currentMonthObj = user.admissions.find(admission => admission.months.some(month => month.month === currentMonth)); %>
+                
+                <% if (currentMonthObj && currentMonthObj.months.length > 0) { %>
+                    <% for (let i = 1; i <= 5; i++) { %>
+                        <% const shift = currentMonthObj.months.find(month => month.month === currentMonth).shifts.find(shift => shift.shift === i); %>
+                        <label>
+                            <input type="checkbox" name="shifts" value="<%= i %>" <%= shift ? 'checked' : '' %> disabled>
+                            Shift <%= i %> (<%= shift ? shift.seatNo : 'NA' %>)
+                        </label>
+                    <% } %>
+                <% } else { %>
+                    <p>No shift information available for <%= currentMonth %></p>
+                <% } %>
+            </div>
+            <div>
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" value="<%= user.address %>">
+            </div>
+        </div>
+        <button class="update-button" type="submit">Update Profile</button>
+    </form>
+</div>
