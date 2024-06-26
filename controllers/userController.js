@@ -22,7 +22,7 @@ const securePassword = async (password) => {
 };
 
 // function to sendEmail to users
-const sendEmail = async (name, email, text) => {
+const sendEmail = async (name, email, topic, text) => {
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -37,8 +37,8 @@ const sendEmail = async (name, email, text) => {
     const mailOptions = {
       from: process.env.emailUser,
       to: email,
-      subject: "Your new Password",
-      html: `<p>Hi ${name}, ${text}.</p>`,
+      subject:topic,
+      html: `<p>${text}.</p>`,
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
@@ -329,7 +329,8 @@ const passwordSend = async (req, res) => {
       // Send email with the new password
       
       const text = `Your ID is: ${email} and Password: ${randomPassword}`;
-      sendEmail(userData.name, userData.email, text);
+      const topic="New Password"
+      sendEmail(userData.name,userData.email,topic,text);
 
       // Render success message
       res.render("loginSignup", { message: "Password has been sent to your mail" });
@@ -653,6 +654,8 @@ const editUserLoad=async(req,res)=>{
  }
 }
 
+
+
 const updateUserShift = async (req, res) => {
   try {
     const {
@@ -671,6 +674,7 @@ const updateUserShift = async (req, res) => {
       dob,
       address,
       isAdmin,
+      adminComment,
       shiftRequests = []
     } = req.body;
 
@@ -710,12 +714,19 @@ const updateUserShift = async (req, res) => {
       return res.status(404).send('User not found');
     }
 
+    // Send admin comment via email if provided
+    if (adminComment) {
+      const topic="अति आवश्यक सूचना" ;
+      sendEmail(name,email,topic,adminComment);
+    }
+
     res.redirect('/adminDashboard'); // Redirect to dashboard after successful update
   } catch (err) {
     console.error('Error updating user:', err);
     res.status(500).send('Server Error');
   }
 };
+
 
 
 
@@ -808,7 +819,8 @@ const addStudentPost = async (req, res) => {
     const password = generateRandomNumericPassword(process.env.length);
     await securePassword(password); // Assuming this is a function to securely hash passwords
     const text = `Your ID is: ${email} and Password: ${password}`;
-    sendEmail(name, email, text);
+    const topic="Your  Account Details" ;
+    sendEmail(name, email,topic, text);
 
     res.status(200).json({ message: 'User added successfully', student: newUser });
   } catch (error) {

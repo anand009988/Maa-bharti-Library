@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>maabhartilibrary.com</title>
     <style>
+        /* Existing styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -42,7 +43,8 @@
             text-align: left;
         }
         .edit-form-input,
-        .edit-form-select {
+        .edit-form-select,
+        .edit-form-textarea {
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
@@ -178,11 +180,7 @@
             <label for="address" class="edit-form-label">Address:</label>
             <input type="text" id="address" name="address" class="edit-form-input" value="<%= user.address %>">
 
-            <!-- <label for="isAdmin" class="edit-form-label">Is Admin:</label>
-            <select id="isAdmin" name="isAdmin" class="edit-form-select">
-                <option value="0" <%= user.is_admin === 0 ? 'selected' : '' %>>No</option>
-                <option value="1" <%= user.is_admin === 1 ? 'selected' : '' %>>Yes</option>
-            </select> -->
+
 
             <h2 class="edit-title">Shift Requests</h2>
             <% user.admissions.forEach(function(admission, admissionIndex) { %>
@@ -223,6 +221,11 @@
                     <% }); %>
                 </div>
             <% }); %>
+
+                        <!-- Comment Section -->
+                        <h2 class="edit-title">Admin Comment</h2>
+                        <label for="adminComment" class="edit-form-label">Comment:</label>
+                        <textarea id="adminComment" name="adminComment" class="edit-form-textarea" rows="5"></textarea>
 
             <button type="submit" class="edit-form-button">Update User</button>
         </form>
