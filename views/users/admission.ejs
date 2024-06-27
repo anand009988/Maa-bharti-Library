@@ -37,6 +37,11 @@
             box-sizing: border-box;
         }
 
+        .profile-info label.required:after {
+            content: " *";
+            color: red;
+        }
+
         .profile-info input[type="file"] {
             margin-top: 10px;
         }
@@ -187,20 +192,20 @@
             <input type="hidden" name="userId" value="<%= user._id %>">
             <div class="profile-info">
                 <div>
-                    <label for="name">Name:</label>
+                    <label for="name" class="required">Name:</label>
                     <input type="text" id="name" name="name" value="<%= user.name %>" placeholder="Name" readonly>
                 </div>
                 <div>
-                    <label for="fatherName">Father's Name:</label>
-                    <input type="text" id="fatherName" name="fatherName" value="<%= user.fatherName %>" placeholder="Father's Name" readonly>
+                    <label for="fatherName" class="required">Father's Name:</label>
+                    <input type="text" id="fatherName" name="fatherName" value="<%= user.fatherName %>" placeholder="Father's Name" required>
                 </div>
                 <div>
-                    <label for="guardianName">Guardian's Name:</label>
-                    <input type="text" id="guardianName" name="guardianName" value="<%= user.guardianName %>" placeholder="Guardian's Name" readonly>
+                    <label for="guardianName" class="required">Guardian's Name:</label>
+                    <input type="text" id="guardianName" name="guardianName" value="<%= user.guardianName %>" placeholder="Guardian's Name" required >
                 </div>
                 <div>
-                    <label for="gender">Gender:</label>
-                    <select id="gender" name="gender" disabled>
+                    <label for="gender" class="required">Gender:</label>
+                    <select id="gender" name="gender" required>
                         <option value="Choose" <%= user.gender === 'Choose' ? 'selected' : '' %>>Choose</option>
                         <option value="Male" <%= user.gender === 'Male' ? 'selected' : '' %>>Male</option>
                         <option value="Female" <%= user.gender === 'Female' ? 'selected' : '' %>>Female</option>
@@ -208,36 +213,36 @@
                     </select>
                 </div>
                 <div>
-                    <label for="mobile">Mobile No:</label>
-                    <input type="text" id="mobile" name="mobile" value="<%= user.mobile %>" readonly>
+                    <label for="mobile" class="required">Mobile No:</label>
+                    <input type="text" id="mobile" name="mobile" value="<%= user.mobile %>" required>
                 </div>
                 <div>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="<%= user.email %>" readonly>
+                    <label for="email" class="required">Email:</label>
+                    <input type="email" id="email" name="email" value="<%= user.email %>" required>
                 </div>
                 <div>
-                    <label for="aadhar">Aadhar No:</label>
-                    <input type="text" id="aadhar" name="aadhar" value="<%= user.aadhar %>"  placeholder="Aadhar No" readonly>
+                    <label for="aadhar" class="required">Aadhar No:</label>
+                    <input type="text" id="aadhar" name="aadhar" value="<%= user.aadhar %>"  placeholder="Aadhar No" required>
                 </div>
                 <div>
-                    <label for="guardianMobile">Guardian's No:</label>
-                    <input type="text" id="guardianMobile" name="guardianMobile" value="<%= user.guardianMobile %>" readonly>
+                    <label for="guardianMobile" class="required">Guardian's No:</label>
+                    <input type="text" id="guardianMobile" name="guardianMobile" value="<%= user.guardianMobile %>" placeholder="Guardian's No" required>
                 </div>
                 <div>
-                    <label for="whatsapp">WhatsApp No:</label>
-                    <input type="text" id="whatsapp" name="whatsapp" value="<%= user.whatsapp %>" placeholder="Whatsapp NO" readonly>
+                    <label for="whatsapp" class="required">WhatsApp No:</label>
+                    <input type="text" id="whatsapp" name="whatsapp" value="<%= user.whatsapp %>" placeholder="Whatsapp NO" required>
                 </div>
                 <div>
                     <label for="aim">Aim:</label>
-                    <input type="text" id="aim" name="aim" value="<%= user.aim %>" placeholder="Aim" readonly>
+                    <input type="text" id="aim" name="aim" value="<%= user.aim %>" placeholder="Aim">
                 </div>
                 <div>
                     <label for="qualification">Qualification:</label>
-                    <input type="text" id="qualification" name="qualification" value="<%= user.qualification %>" placeholder="Qualification" readonly>
+                    <input type="text" id="qualification" name="qualification" value="<%= user.qualification %>" placeholder="Qualification">
                 </div>
                 <div>
-                    <label for="dob">Date of Birth:</label>
-                    <input type="date" id="dob" name="dob" value="<%= user.dob.toISOString().split('T')[0] %>" readonly>
+                    <label for="dob" class="required">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" value="<%= user.dob.toISOString().split('T')[0] %>" required>
                 </div>
                 <div>
                     <label for="year">Year:</label>
@@ -275,7 +280,7 @@
                     </select>
                 </div>
                 <div>
-                    <label for="shifts">Shifts:</label>
+                    <label for="shifts" class="required">Shifts:</label>
                     <div class="shift-checkboxes">
                         <% 
                         const currentYear = new Date().getFullYear();
@@ -296,8 +301,8 @@
                     </div>
                 </div>
                 <div>
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" value="<%= user.address %>" placeholder="Address" readonly>
+                    <label for="address" class="required">Address:</label>
+                    <input type="text" id="address" name="address" value="<%= user.address %>" placeholder="Address" required>
                 </div>
             </div>
             <div>
@@ -308,6 +313,7 @@
                 <input type="checkbox" id="submitCheckbox" required>
                 <label for="submitCheckbox">I agree to the terms and conditions</label>
             </div>
+            <p class="asterisk-note"><span style="color: red;">**</span>Meaning:  You must fill out this information</p>
             <button class="next-button" type="button">Next</button>
         </form>
     </div>
@@ -318,6 +324,14 @@
             const nextButton = document.querySelector('.next-button');
 
             nextButton.addEventListener('click', () => {
+
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+
+
                 const shiftCheckboxes = document.querySelectorAll('input[name="shifts"]:checked');
                 if (shiftCheckboxes.length === 0) {
                     alert('Please select at least one shift.');
