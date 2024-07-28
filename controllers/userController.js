@@ -716,7 +716,7 @@ const updateUserShift = async (req, res) => {
 
     // Send admin comment via email if provided
     if (adminComment) {
-      const topic="अति आवश्यक सूचना" ;
+      const topic="माँ भारती लाइब्रेरी" ;
       sendEmail(name,email,topic,adminComment);
     }
 

@@ -93,7 +93,7 @@ const studentSchema = new mongoose.Schema({
   },
   aadhar: {
     type: String,
-    default: "update your aadhar no",
+//    default: "update your aadhar no",
     unique: false
   },
   image: {

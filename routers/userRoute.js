@@ -86,7 +86,9 @@ user_route.post('/change-password',auth.isLogin,usercontroller.changePassword) ;
 user_route.get('/studentDashboard/payment',auth.isLogin,usercontroller.paymentLoad) ;
 
 
-
+user_route.use((req, res) => {
+    res.redirect('/loginSignup');
+});
 
 
 
